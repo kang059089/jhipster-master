@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<VersionFile>
+    <versionNo>0.0.1</versionNo>
+    <versionInfo> </versionInfo>
+    <updateDate>2018-07-09 18:13</updateDate>
+    <latestVersionNo>0.0.1</latestVersionNo>
+    <latestVersionInfo> </latestVersionInfo>
+    <latestUpdateDate> </latestUpdateDate>
+    <appDownloadUrl>http://192.168.0.147:8080/version/jhipsterIonicBlank/android/jhipsterIonicBlank.apk</appDownloadUrl>
+    <forceUpdateState>1</forceUpdateState>
+</VersionFile>
