@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userVersionFile">
+            <h2><span jhiTranslate="jhipsterMasterApp.userVersionFile.detail.title">User Version File</span> {{userVersionFile.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterMasterApp.userVersionFile.userId">User Id</span></dt>
+                <dd>
+                    <span>{{userVersionFile.userId}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.userVersionFile.versionNo">Version No</span></dt>
+                <dd>
+                    <span>{{userVersionFile.versionNo}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.userVersionFile.versionInfo">Version Info</span></dt>
+                <dd>
+                    <span>{{userVersionFile.versionInfo}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.userVersionFile.versionReleaseDate">Version Release Date</span></dt>
+                <dd>
+                    <span>{{userVersionFile.versionReleaseDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-version-file', userVersionFile.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

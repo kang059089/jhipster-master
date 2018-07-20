@@ -1,0 +1,66 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jhipsterMasterApp.versionFile.home.title">Version Files</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-version-file" [routerLink]="['/version-file/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="jhipsterMasterApp.versionFile.home.createLabel">
+            Create new Version File
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="versionFiles">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="jhipsterMasterApp.versionFile.versionNo">Version No</span></th>
+            <th><span jhiTranslate="jhipsterMasterApp.versionFile.versionInfo">Version Info</span></th>
+            <th><span jhiTranslate="jhipsterMasterApp.versionFile.updateDate">Update Date</span></th>
+            <th><span jhiTranslate="jhipsterMasterApp.versionFile.latestVersionNo">Latest Version No</span></th>
+            <th><span jhiTranslate="jhipsterMasterApp.versionFile.latestVersionInfo">Latest Version Info</span></th>
+            <th><span jhiTranslate="jhipsterMasterApp.versionFile.latestUpdateDate">Latest Update Date</span></th>
+            <th><span jhiTranslate="jhipsterMasterApp.versionFile.appDownloadUrl">App Download Url</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let versionFile of versionFiles ;trackBy: trackId">
+                <td><a [routerLink]="['/version-file', versionFile.id, 'view' ]">{{versionFile.id}}</a></td>
+                <td>{{versionFile.versionNo}}</td>
+                <td>{{versionFile.versionInfo}}</td>
+                <td>{{versionFile.updateDate}}</td>
+                <td>{{versionFile.latestVersionNo}}</td>
+                <td>{{versionFile.latestVersionInfo}}</td>
+                <td>{{versionFile.latestUpdateDate}}</td>
+                <td>{{versionFile.appDownloadUrl}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/version-file', versionFile.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/version-file', versionFile.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'version-file/'+ versionFile.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

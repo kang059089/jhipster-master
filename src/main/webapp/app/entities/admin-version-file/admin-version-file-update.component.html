@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-admin-version-file-heading" jhiTranslate="jhipsterMasterApp.adminVersionFile.home.createOrEditLabel">Create or edit a Admin Version File</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!adminVersionFile.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="adminVersionFile.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.adminVersionFile.versionNo" for="field_versionNo">Version No</label>
+                    <input type="text" class="form-control" name="versionNo" id="field_versionNo"
+                        [(ngModel)]="adminVersionFile.versionNo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.adminVersionFile.versionInfo" for="field_versionInfo">Version Info</label>
+                    <input type="text" class="form-control" name="versionInfo" id="field_versionInfo"
+                        [(ngModel)]="adminVersionFile.versionInfo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.adminVersionFile.forceUpdateState" for="field_forceUpdateState">Force Update State</label>
+                    <input type="checkbox" class="form-control" name="forceUpdateState" id="field_forceUpdateState"
+                        [(ngModel)]="adminVersionFile.forceUpdateState" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.adminVersionFile.versionReleaseState" for="field_versionReleaseState">Version Release State</label>
+                    <input type="checkbox" class="form-control" name="versionReleaseState" id="field_versionReleaseState"
+                        [(ngModel)]="adminVersionFile.versionReleaseState" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.adminVersionFile.appDownloadUrl" for="field_appDownloadUrl">App Download Url</label>
+                    <input type="text" class="form-control" name="appDownloadUrl" id="field_appDownloadUrl"
+                        [(ngModel)]="adminVersionFile.appDownloadUrl" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.adminVersionFile.versionReleaseDate" for="field_versionReleaseDate">Version Release Date</label>
+                    <div class="d-flex">
+                        <input id="field_versionReleaseDate" type="datetime-local" class="form-control" name="versionReleaseDate" [(ngModel)]="versionReleaseDate"
+                        />
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

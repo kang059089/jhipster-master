@@ -1,0 +1,27 @@
+
+{
+    "jhipsterMasterApp": {
+        "adminVersionFile" : {
+            "home": {
+                "title": "Admin Version Files",
+                "createLabel": "创建新 Admin Version File",
+                "createOrEditLabel": "创建或编辑 Admin Version File"
+            },
+            "created": "Admin Version File {{ param }} 创建成功",
+            "updated": "Admin Version File {{ param }} 更新成功",
+            "deleted": "Admin Version File {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Admin Version File {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Admin Version File"
+            },
+            "versionNo": "Version No",
+            "versionInfo": "Version Info",
+            "forceUpdateState": "Force Update State",
+            "versionReleaseState": "Version Release State",
+            "appDownloadUrl": "App Download Url",
+            "versionReleaseDate": "Version Release Date"
+        }
+    }
+}

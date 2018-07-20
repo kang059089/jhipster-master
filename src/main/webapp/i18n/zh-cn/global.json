@@ -8,6 +8,9 @@
             "entities": {
                 "main": "数据",
                 "versionFile": "Version File",
+                "adminVersionFile": "Admin Version File",
+                "userVersionfile": "User Versionfile",
+                "userVersionFile": "User Version File",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

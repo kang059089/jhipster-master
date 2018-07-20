@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-version-file-heading" jhiTranslate="jhipsterMasterApp.versionFile.home.createOrEditLabel">Create or edit a Version File</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!versionFile.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="versionFile.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.versionFile.versionNo" for="field_versionNo">Version No</label>
+                    <input type="text" class="form-control" name="versionNo" id="field_versionNo"
+                        [(ngModel)]="versionFile.versionNo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.versionFile.versionInfo" for="field_versionInfo">Version Info</label>
+                    <input type="text" class="form-control" name="versionInfo" id="field_versionInfo"
+                        [(ngModel)]="versionFile.versionInfo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.versionFile.updateDate" for="field_updateDate">Update Date</label>
+                    <input type="text" class="form-control" name="updateDate" id="field_updateDate"
+                        [(ngModel)]="versionFile.updateDate" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.versionFile.latestVersionNo" for="field_latestVersionNo">Latest Version No</label>
+                    <input type="text" class="form-control" name="latestVersionNo" id="field_latestVersionNo"
+                        [(ngModel)]="versionFile.latestVersionNo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.versionFile.latestVersionInfo" for="field_latestVersionInfo">Latest Version Info</label>
+                    <input type="text" class="form-control" name="latestVersionInfo" id="field_latestVersionInfo"
+                        [(ngModel)]="versionFile.latestVersionInfo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.versionFile.latestUpdateDate" for="field_latestUpdateDate">Latest Update Date</label>
+                    <input type="text" class="form-control" name="latestUpdateDate" id="field_latestUpdateDate"
+                        [(ngModel)]="versionFile.latestUpdateDate" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jhipsterMasterApp.versionFile.appDownloadUrl" for="field_appDownloadUrl">App Download Url</label>
+                    <input type="text" class="form-control" name="appDownloadUrl" id="field_appDownloadUrl"
+                        [(ngModel)]="versionFile.appDownloadUrl" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

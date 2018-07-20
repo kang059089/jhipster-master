@@ -1,0 +1,28 @@
+
+{
+    "jhipsterMasterApp": {
+        "versionFile" : {
+            "home": {
+                "title": "Version Files",
+                "createLabel": "创建新 Version File",
+                "createOrEditLabel": "创建或编辑 Version File"
+            },
+            "created": "Version File {{ param }} 创建成功",
+            "updated": "Version File {{ param }} 更新成功",
+            "deleted": "Version File {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 Version File {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "Version File"
+            },
+            "versionNo": "Version No",
+            "versionInfo": "Version Info",
+            "updateDate": "Update Date",
+            "latestVersionNo": "Latest Version No",
+            "latestVersionInfo": "Latest Version Info",
+            "latestUpdateDate": "Latest Update Date",
+            "appDownloadUrl": "App Download Url"
+        }
+    }
+}

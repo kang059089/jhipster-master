@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="versionFile">
+            <h2><span jhiTranslate="jhipsterMasterApp.versionFile.detail.title">Version File</span> {{versionFile.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterMasterApp.versionFile.versionNo">Version No</span></dt>
+                <dd>
+                    <span>{{versionFile.versionNo}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.versionFile.versionInfo">Version Info</span></dt>
+                <dd>
+                    <span>{{versionFile.versionInfo}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.versionFile.updateDate">Update Date</span></dt>
+                <dd>
+                    <span>{{versionFile.updateDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.versionFile.latestVersionNo">Latest Version No</span></dt>
+                <dd>
+                    <span>{{versionFile.latestVersionNo}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.versionFile.latestVersionInfo">Latest Version Info</span></dt>
+                <dd>
+                    <span>{{versionFile.latestVersionInfo}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.versionFile.latestUpdateDate">Latest Update Date</span></dt>
+                <dd>
+                    <span>{{versionFile.latestUpdateDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.versionFile.appDownloadUrl">App Download Url</span></dt>
+                <dd>
+                    <span>{{versionFile.appDownloadUrl}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/version-file', versionFile.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+
+{
+    "jhipsterMasterApp": {
+        "userVersionFile" : {
+            "home": {
+                "title": "User Version Files",
+                "createLabel": "建立一筆新的 User Version File",
+                "createOrEditLabel": "建立或編輯 User Version File"
+            },
+            "created": "新的 User Version File 建立成功，識別碼為 {{ param }}",
+            "updated": "識別碼為 {{ param }} 的 User Version File 更新成功",
+            "deleted": "識別碼為 {{ param }} 的 User Version File 刪除成功",
+            "delete": {
+                "question": "您確定要刪除 User Version File {{ id }} 嗎?"
+            },
+            "detail": {
+                "title": "User Version File"
+            },
+            "userId": "User Id",
+            "versionNo": "Version No",
+            "versionInfo": "Version Info",
+            "versionReleaseDate": "Version Release Date"
+        }
+    }
+}

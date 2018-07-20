@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="adminVersionFile">
+            <h2><span jhiTranslate="jhipsterMasterApp.adminVersionFile.detail.title">Admin Version File</span> {{adminVersionFile.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jhipsterMasterApp.adminVersionFile.versionNo">Version No</span></dt>
+                <dd>
+                    <span>{{adminVersionFile.versionNo}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.adminVersionFile.versionInfo">Version Info</span></dt>
+                <dd>
+                    <span>{{adminVersionFile.versionInfo}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.adminVersionFile.forceUpdateState">Force Update State</span></dt>
+                <dd>
+                    <span>{{adminVersionFile.forceUpdateState}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.adminVersionFile.versionReleaseState">Version Release State</span></dt>
+                <dd>
+                    <span>{{adminVersionFile.versionReleaseState}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.adminVersionFile.appDownloadUrl">App Download Url</span></dt>
+                <dd>
+                    <span>{{adminVersionFile.appDownloadUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="jhipsterMasterApp.adminVersionFile.versionReleaseDate">Version Release Date</span></dt>
+                <dd>
+                    <span>{{adminVersionFile.versionReleaseDate}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/admin-version-file', adminVersionFile.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

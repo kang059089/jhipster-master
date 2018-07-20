@@ -1,0 +1,27 @@
+
+{
+    "jhipsterMasterApp": {
+        "adminVersionFile" : {
+            "home": {
+                "title": "Admin Version Files",
+                "createLabel": "Create a new Admin Version File",
+                "createOrEditLabel": "Create or edit a Admin Version File"
+            },
+            "created": "A new Admin Version File is created with identifier {{ param }}",
+            "updated": "A Admin Version File is updated with identifier {{ param }}",
+            "deleted": "A Admin Version File is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Admin Version File {{ id }}?"
+            },
+            "detail": {
+                "title": "Admin Version File"
+            },
+            "versionNo": "Version No",
+            "versionInfo": "Version Info",
+            "forceUpdateState": "Force Update State",
+            "versionReleaseState": "Version Release State",
+            "appDownloadUrl": "App Download Url",
+            "versionReleaseDate": "Version Release Date"
+        }
+    }
+}

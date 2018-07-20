@@ -1,0 +1,25 @@
+
+{
+    "jhipsterMasterApp": {
+        "userVersionFile" : {
+            "home": {
+                "title": "User Version Files",
+                "createLabel": "Create a new User Version File",
+                "createOrEditLabel": "Create or edit a User Version File"
+            },
+            "created": "A new User Version File is created with identifier {{ param }}",
+            "updated": "A User Version File is updated with identifier {{ param }}",
+            "deleted": "A User Version File is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete User Version File {{ id }}?"
+            },
+            "detail": {
+                "title": "User Version File"
+            },
+            "userId": "User Id",
+            "versionNo": "Version No",
+            "versionInfo": "Version Info",
+            "versionReleaseDate": "Version Release Date"
+        }
+    }
+}

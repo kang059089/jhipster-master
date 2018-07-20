@@ -1,0 +1,28 @@
+
+{
+    "jhipsterMasterApp": {
+        "versionFile" : {
+            "home": {
+                "title": "Version Files",
+                "createLabel": "Create a new Version File",
+                "createOrEditLabel": "Create or edit a Version File"
+            },
+            "created": "A new Version File is created with identifier {{ param }}",
+            "updated": "A Version File is updated with identifier {{ param }}",
+            "deleted": "A Version File is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Version File {{ id }}?"
+            },
+            "detail": {
+                "title": "Version File"
+            },
+            "versionNo": "Version No",
+            "versionInfo": "Version Info",
+            "updateDate": "Update Date",
+            "latestVersionNo": "Latest Version No",
+            "latestVersionInfo": "Latest Version Info",
+            "latestUpdateDate": "Latest Update Date",
+            "appDownloadUrl": "App Download Url"
+        }
+    }
+}
