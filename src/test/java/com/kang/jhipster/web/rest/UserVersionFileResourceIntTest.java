@@ -160,7 +160,7 @@ public class UserVersionFileResourceIntTest {
             .andExpect(jsonPath("$.[*].versionInfo").value(hasItem(DEFAULT_VERSION_INFO.toString())))
             .andExpect(jsonPath("$.[*].versionReleaseDate").value(hasItem(DEFAULT_VERSION_RELEASE_DATE.toString())));
     }
-    
+
 
     @Test
     @Transactional

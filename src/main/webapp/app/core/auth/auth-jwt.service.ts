@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 
 import { SERVER_API_URL } from 'app/app.constants';
+import { Secret } from '../../shared/util/secret';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServerProvider {
@@ -15,9 +16,10 @@ export class AuthServerProvider {
     }
 
     login(credentials): Observable<any> {
+        const secret = new Secret();
         const data = {
-            username: credentials.username,
-            password: credentials.password,
+            username: secret.Encrypt(credentials.username),
+            password: secret.Encrypt(credentials.password),
             rememberMe: credentials.rememberMe
         };
         return this.http.post(SERVER_API_URL + 'api/authenticate', data, { observe: 'response' }).pipe(map(authenticateSuccess.bind(this)));

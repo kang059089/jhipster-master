@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "userId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "versionNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "versionInfo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "versionReleaseDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180720043142",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "user_version_file",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

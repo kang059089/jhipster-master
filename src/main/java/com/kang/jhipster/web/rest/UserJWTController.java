@@ -2,6 +2,7 @@ package com.kang.jhipster.web.rest;
 
 import com.kang.jhipster.security.jwt.JWTConfigurer;
 import com.kang.jhipster.security.jwt.TokenProvider;
+import com.kang.jhipster.service.util.AesEncodeUtil;
 import com.kang.jhipster.web.rest.vm.LoginVM;
 
 import com.codahale.metrics.annotation.Timed;
@@ -37,6 +38,9 @@ public class UserJWTController {
     @PostMapping("/authenticate")
     @Timed
     public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginVM loginVM) {
+
+        loginVM.setUsername(AesEncodeUtil.decrypt(loginVM.getUsername()));
+        loginVM.setPassword(AesEncodeUtil.decrypt(loginVM.getPassword()));
 
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(loginVM.getUsername(), loginVM.getPassword());
