@@ -42,6 +42,10 @@ public class CacheConfiguration {
             cm.createCache(com.kang.jhipster.domain.AdminVersionFile.class.getName(), jcacheConfiguration);
             cm.createCache(com.kang.jhipster.domain.UserVersionFile.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
+
+            cm.createCache("aesKey", jcacheConfiguration);
+            cm.createCache("identifyingCode", jcacheConfiguration);
+
         };
     }
 }
