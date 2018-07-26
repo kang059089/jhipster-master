@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{email.verification.title}">JHipster activation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+<body>
+    <div style="width: 100%; max-width: 600px; padding: 20px; margin: 0 auto;">
+        <div style="text-align: center; background-color: #49afcd; height: 50px;">
+            <img height="30" src="http://192.168.0.147:8090/content/images/logo-jhipster.png">
+        </div>
+        <div style="background-color: #fff; border: 1px solid #e3e9ed; margin-bottom: 10px;">
+            <div style="padding: 20px;">
+                <p th:text="#{email.verification.greeting(${user.email})}"></p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em style="font-style: normal;" th:text="#{email.verification.text1}"></em>
+                <div style="text-align: center; font-size: 28px; font-weight: bold; background-color: #fcfcfc; padding: 10px 20px; border: 1px solid #e3e9ed; width: 200px; height: 50px; line-height: 50px; margin: 25px 150px;">
+                    <em style="font-style: normal;" th:text="#{email.verification.code(${user.code})}"></em>
+                </div>
+                <p>
+                    <span th:text="#{email.verification.text2}"></span>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em style="font-style: normal;" th:text="#{email.verification.signature}"></em>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

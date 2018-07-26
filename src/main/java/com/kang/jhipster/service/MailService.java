@@ -102,4 +102,10 @@ public class MailService {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
     }
+
+    @Async
+    public void sendVerificationCodeMail(User user) {
+        log.debug("发送验证码邮件给邮箱： '{}'", user.getEmail());
+        sendEmailFromTemplate(user, "mail/verificationCodeEmail", "email.verification.title");
+    }
 }

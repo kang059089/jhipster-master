@@ -32,9 +32,9 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:jhipstermaster;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-        username: jhipsterMaster
-        password:
+        url: jdbc:mysql://localhost:3306/jhipster_ionic_blank?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true
+        username: root
+        password: root
     h2:
         console:
             enabled: false
@@ -51,10 +51,10 @@ spring:
     liquibase:
         contexts: dev
     mail:
-        host: localhost
+        host: smtp.bigcloudenergy.com
         port: 25
-        username:
-        password:
+        username: admin@bigcloudenergy.com
+        password: Fangling123
     messages:
         cache-duration: PT1S # 1 second, see the ISO 8601 standard
     thymeleaf:
@@ -78,7 +78,7 @@ spring:
 #        key-alias: jhipstermaster
 # ===================================================================
 server:
-    port: 8080
+    port: 8090
 
 # ===================================================================
 # JHipster specific properties
@@ -109,7 +109,7 @@ jhipster:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: jhipsterMaster@localhost
+        from: admin@bigcloudenergy.com
         base-url: http://127.0.0.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
