@@ -5,7 +5,6 @@ import com.kang.jhipster.security.RSAUtils;
 import com.kang.jhipster.security.UUIDUtils;
 import com.kang.jhipster.security.jwt.JWTConfigurer;
 import com.kang.jhipster.security.jwt.TokenProvider;
-import com.kang.jhipster.service.UserService;
 import com.kang.jhipster.web.rest.vm.LoginVM;
 
 import com.codahale.metrics.annotation.Timed;

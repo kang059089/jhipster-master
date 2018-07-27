@@ -99,6 +99,13 @@ jhipster:
         license:
         license-url:
 
+mybatis:
+    #指定*Mapper.xml中使用的对象的包的位置（同时可以指定别名）
+    type-aliases-package: com.kang.jhipster
+    #指定*Mapper.xml的位置
+    mapper-locations: classpath:mappers/*.xml
+
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

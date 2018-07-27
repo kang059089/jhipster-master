@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kang.jhipster.dao.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.kang.jhipster.entity.UserInfo">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="login" jdbcType="VARCHAR" property="login" />
+        <result column="password_hash" jdbcType="VARCHAR" property="passwordHash" />
+        <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+        <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+        <result column="activated" jdbcType="BIT" property="activated" />
+        <result column="lang_key" jdbcType="VARCHAR" property="langKey" />
+        <result column="activation_key" jdbcType="VARCHAR" property="activationKey" />
+        <result column="reset_key" jdbcType="VARCHAR" property="resetKey" />
+        <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+        <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+        <result column="reset_date" jdbcType="TIMESTAMP" property="resetDate" />
+        <result column="last_modified_by" jdbcType="VARCHAR" property="lastModifiedBy" />
+        <result column="last_modified_date" jdbcType="TIMESTAMP" property="lastModifiedDate" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, login, password_hash, first_name, last_name, email, image_url, activated, lang_key,
+    activation_key, reset_key, created_by, created_date, reset_date, last_modified_by,
+    last_modified_date
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from jhi_user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from jhi_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.kang.jhipster.entity.UserInfo">
+    insert into jhi_user (id, login, password_hash,
+      first_name, last_name, email,
+      image_url, activated, lang_key,
+      activation_key, reset_key, created_by,
+      created_date, reset_date, last_modified_by,
+      last_modified_date)
+    values (#{id,jdbcType=BIGINT}, #{login,jdbcType=VARCHAR}, #{passwordHash,jdbcType=VARCHAR},
+      #{firstName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+      #{imageUrl,jdbcType=VARCHAR}, #{activated,jdbcType=BIT}, #{langKey,jdbcType=VARCHAR},
+      #{activationKey,jdbcType=VARCHAR}, #{resetKey,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR},
+      #{createdDate,jdbcType=TIMESTAMP}, #{resetDate,jdbcType=TIMESTAMP}, #{lastModifiedBy,jdbcType=VARCHAR},
+      #{lastModifiedDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.kang.jhipster.entity.UserInfo">
+        insert into jhi_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="login != null">
+                login,
+            </if>
+            <if test="passwordHash != null">
+                password_hash,
+            </if>
+            <if test="firstName != null">
+                first_name,
+            </if>
+            <if test="lastName != null">
+                last_name,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="imageUrl != null">
+                image_url,
+            </if>
+            <if test="activated != null">
+                activated,
+            </if>
+            <if test="langKey != null">
+                lang_key,
+            </if>
+            <if test="activationKey != null">
+                activation_key,
+            </if>
+            <if test="resetKey != null">
+                reset_key,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdDate != null">
+                created_date,
+            </if>
+            <if test="resetDate != null">
+                reset_date,
+            </if>
+            <if test="lastModifiedBy != null">
+                last_modified_by,
+            </if>
+            <if test="lastModifiedDate != null">
+                last_modified_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="login != null">
+                #{login,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordHash != null">
+                #{passwordHash,jdbcType=VARCHAR},
+            </if>
+            <if test="firstName != null">
+                #{firstName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastName != null">
+                #{lastName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="imageUrl != null">
+                #{imageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="activated != null">
+                #{activated,jdbcType=BIT},
+            </if>
+            <if test="langKey != null">
+                #{langKey,jdbcType=VARCHAR},
+            </if>
+            <if test="activationKey != null">
+                #{activationKey,jdbcType=VARCHAR},
+            </if>
+            <if test="resetKey != null">
+                #{resetKey,jdbcType=VARCHAR},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null">
+                #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="resetDate != null">
+                #{resetDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifiedBy != null">
+                #{lastModifiedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifiedDate != null">
+                #{lastModifiedDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.kang.jhipster.entity.UserInfo">
+        update jhi_user
+        <set>
+            <if test="login != null">
+                login = #{login,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordHash != null">
+                password_hash = #{passwordHash,jdbcType=VARCHAR},
+            </if>
+            <if test="firstName != null">
+                first_name = #{firstName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastName != null">
+                last_name = #{lastName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="imageUrl != null">
+                image_url = #{imageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="activated != null">
+                activated = #{activated,jdbcType=BIT},
+            </if>
+            <if test="langKey != null">
+                lang_key = #{langKey,jdbcType=VARCHAR},
+            </if>
+            <if test="activationKey != null">
+                activation_key = #{activationKey,jdbcType=VARCHAR},
+            </if>
+            <if test="resetKey != null">
+                reset_key = #{resetKey,jdbcType=VARCHAR},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createdDate != null">
+                created_date = #{createdDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="resetDate != null">
+                reset_date = #{resetDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifiedBy != null">
+                last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifiedDate != null">
+                last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.kang.jhipster.entity.UserInfo">
+    update jhi_user
+    set login = #{login,jdbcType=VARCHAR},
+      password_hash = #{passwordHash,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=VARCHAR},
+      last_name = #{lastName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      activated = #{activated,jdbcType=BIT},
+      lang_key = #{langKey,jdbcType=VARCHAR},
+      activation_key = #{activationKey,jdbcType=VARCHAR},
+      reset_key = #{resetKey,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      reset_date = #{resetDate,jdbcType=TIMESTAMP},
+      last_modified_by = #{lastModifiedBy,jdbcType=VARCHAR},
+      last_modified_date = #{lastModifiedDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
