@@ -20,6 +20,7 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -43,29 +44,32 @@ public class AccountResource {
 
     private final MailService mailService;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Resource
     private CacheManager cacheManager;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, PasswordEncoder passwordEncoder) {
 
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
      * POST  /register : register the user.
-     *
+     * 用户注册
      * @param managedUserVM the managed user View Model
      * @throws InvalidPasswordException 400 (Bad Request) if the password is incorrect
      * @throws EmailAlreadyUsedException 400 (Bad Request) if the email is already used
      * @throws LoginAlreadyUsedException 400 (Bad Request) if the login is already used
+     * @return 返回值为0：重置成功；为1：重置失败；为2：验证码错误
      */
     @PostMapping("/register")
     @Timed
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
-        System.out.println(managedUserVM);
+    public Integer registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
         //获取identifyingCode的缓存条目
         Cache identifyingCodeCache = cacheManager.getCache("identifyingCode");
         try {
@@ -74,12 +78,15 @@ public class AccountResource {
             if (code.equals(managedUserVM.getCode()) || code == managedUserVM.getCode()) {
                 managedUserVM.setActivated(true);
                 User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-                return ResponseUtil.wrapOrNotFound(Optional.ofNullable(user));
+                //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(user));
+                return 0;
             }
+            return 2;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new User()));
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new User()));
+        return 1;
 //        if (!checkPasswordLength(managedUserVM.getPassword())) {
 //            throw new InvalidPasswordException();
 //        }
@@ -203,6 +210,47 @@ public class AccountResource {
         if (!user.isPresent()) {
             throw new InternalServerErrorException("No user was found for this reset key");
         }
+    }
+
+    /**
+     * 用户重置密码
+     * @param managedUserVM
+     */
+    /**
+     * 用户重置密码
+     * @param managedUserVM
+     * @return 返回值为0：重置成功；为1：重置失败；为2：验证码错误
+     */
+    @PostMapping("/resetPassword")
+    @Timed
+    public Integer resetPassword(@Valid @RequestBody ManagedUserVM managedUserVM) {
+        log.debug("重置密码请求参数为 : {}", managedUserVM);
+        //获取identifyingCode的缓存条目
+        Cache identifyingCodeCache = cacheManager.getCache("identifyingCode");
+        try {
+            //获取存储到缓存中的code验证码
+            String code = (String)identifyingCodeCache.get(managedUserVM.getClientId()).get();
+            if (code.equals(managedUserVM.getCode()) || code == managedUserVM.getCode()) {
+                User user = new User();
+                if (!"".equals(managedUserVM.getEmail()) || "" != managedUserVM.getEmail()) {
+                    user = userRepository.getUserByEmail(managedUserVM.getEmail());
+
+                } else if (!"".equals(managedUserVM.getPhone()) || "" != managedUserVM.getPhone()) {
+                    user = userRepository.getUserByPhone(managedUserVM.getPhone());
+                }
+                user.setPassword(passwordEncoder.encode(managedUserVM.getPassword()));
+                userRepository.save(user);
+                Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
+//                userRepository.save(user);
+                //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(user));
+                return 0;
+            }
+            return 2;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new User()));
+        return 1;
     }
 
     private static boolean checkPasswordLength(String password) {

@@ -48,4 +48,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "select count(id) from jhi_user where email = ?1 or phone = ?1 ", nativeQuery = true)
     Integer findEmailOrPhone(String phoneOrEmail);
+
+    @Query(value = "select * from jhi_user where email = ?1 ", nativeQuery = true)
+    User getUserByEmail(String email);
+
+    @Query(value = "select * from jhi_user where phone = ?1 ", nativeQuery = true)
+    User getUserByPhone(String phone);
 }
