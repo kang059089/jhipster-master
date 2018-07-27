@@ -1,10 +1,16 @@
 import { Component, AfterViewInit, Renderer, ElementRef } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { JhiEventManager } from 'ng-jhipster';
+import { LocalStorageService } from 'ngx-webstorage';
 
 import { LoginService } from 'app/core/login/login.service';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
+
+import { AesServerProvider } from '../../core/auth/aes.service';
+import { RsaServerProvider } from '../../core/auth/rsa.service';
+import { SERVER_API_URL } from 'app/app.constants';
 
 @Component({
     selector: 'jhi-login-modal',
@@ -24,9 +30,28 @@ export class JhiLoginModalComponent implements AfterViewInit {
         private elementRef: ElementRef,
         private renderer: Renderer,
         private router: Router,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        private rsaServerProvider: RsaServerProvider,
+        private aesServerProvider: AesServerProvider,
+        private $localStorage: LocalStorageService,
+        private http: HttpClient
     ) {
         this.credentials = {};
+        const aesKey = this.aesServerProvider.randomString(16);
+        let uuid = '';
+        this.$localStorage.store('aesKey', aesKey);
+        const aeskeyStr = rsaServerProvider.encrypt(aesKey);
+
+        this.http.post(SERVER_API_URL + 'api/init', aeskeyStr).subscribe(
+            res => {
+                const uuidStr = res['uuid'];
+                this.$localStorage.store('uuid', uuidStr);
+            },
+            err => {
+                // 失败回调
+                console.log(err);
+            }
+        );
     }
 
     ngAfterViewInit() {
@@ -44,11 +69,14 @@ export class JhiLoginModalComponent implements AfterViewInit {
     }
 
     login() {
+        let useInfo = this.username + '####' + this.password;
+        useInfo = this.aesServerProvider.encrypt(useInfo, this.$localStorage.retrieve('aesKey'));
         this.loginService
             .login({
                 username: this.username,
                 password: this.password,
-                rememberMe: this.rememberMe
+                rememberMe: this.rememberMe,
+                useInfo: useInfo
             })
             .then(() => {
                 this.authenticationError = false;
