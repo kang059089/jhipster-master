@@ -35,6 +35,8 @@ public class UserDTO {
     @Size(min = 5, max = 254)
     private String email;
 
+    private String phone;
+
     @Size(max = 256)
     private String imageUrl;
 
@@ -53,6 +55,10 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private String code;
+
+    private String clientId;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -63,6 +69,7 @@ public class UserDTO {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+        this.phone = user.getPhone();
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
@@ -70,6 +77,8 @@ public class UserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.code = user.getCode();
+        this.clientId = user.getClientId();
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
@@ -171,6 +180,30 @@ public class UserDTO {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
     public Set<String> getAuthorities() {
         return authorities;
     }
@@ -186,6 +219,7 @@ public class UserDTO {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", phone='" + phone + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
@@ -193,6 +227,8 @@ public class UserDTO {
             ", createdDate=" + createdDate +
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
+            ", code='" + code + '\'' +
+            ", clientId='" + clientId + '\'' +
             ", authorities=" + authorities +
             "}";
     }

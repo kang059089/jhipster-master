@@ -188,4 +188,12 @@ public class UserResource {
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
     }
+
+    @GetMapping("/users/isRegister/{phoneOrEmail}")
+    @Timed
+    public Integer isRegister(@PathVariable String phoneOrEmail) {
+        log.debug("判断用户是否已注册的参数：{}", phoneOrEmail);
+        Integer count = userRepository.findEmailOrPhone(phoneOrEmail);
+        return count;
+    }
 }

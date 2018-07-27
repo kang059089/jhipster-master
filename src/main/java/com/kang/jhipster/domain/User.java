@@ -59,6 +59,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 254, unique = true)
     private String email;
 
+    @Column(name = "phone")
+    private String phone;
+
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
@@ -86,6 +89,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Transient
     private String code;
+
+    @Transient
+    private String clientId;
 
     @JsonIgnore
     @ManyToMany
@@ -146,6 +152,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -194,6 +208,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.code = code;
     }
 
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
     public String getLangKey() {
         return langKey;
     }
@@ -235,6 +257,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", phone='" + phone + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +

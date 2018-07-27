@@ -12,12 +12,17 @@ import com.kang.jhipster.web.rest.errors.*;
 import com.kang.jhipster.web.rest.vm.KeyAndPasswordVM;
 import com.kang.jhipster.web.rest.vm.ManagedUserVM;
 
+import io.github.jhipster.web.util.ResponseUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import com.kang.jhipster.service.dto.PasswordChangeDTO;
@@ -38,6 +43,9 @@ public class AccountResource {
 
     private final MailService mailService;
 
+    @Resource
+    private CacheManager cacheManager;
+
     public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
 
         this.userRepository = userRepository;
@@ -56,14 +64,29 @@ public class AccountResource {
     @PostMapping("/register")
     @Timed
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
-        if (!checkPasswordLength(managedUserVM.getPassword())) {
-            throw new InvalidPasswordException();
+    public ResponseEntity<User> registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+        System.out.println(managedUserVM);
+        //获取identifyingCode的缓存条目
+        Cache identifyingCodeCache = cacheManager.getCache("identifyingCode");
+        try {
+            //获取存储到缓存中的code验证码
+            String code = (String)identifyingCodeCache.get(managedUserVM.getClientId()).get();
+            if (code.equals(managedUserVM.getCode()) || code == managedUserVM.getCode()) {
+                managedUserVM.setActivated(true);
+                User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+                return ResponseUtil.wrapOrNotFound(Optional.ofNullable(user));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
-        userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        mailService.sendActivationEmail(user);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new User()));
+//        if (!checkPasswordLength(managedUserVM.getPassword())) {
+//            throw new InvalidPasswordException();
+//        }
+        //userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
+        //userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
+        //User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        //mailService.sendActivationEmail(user);
     }
 
     /**

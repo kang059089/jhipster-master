@@ -28,7 +28,6 @@ public class VerificationCodeResource {
     private CacheManager cacheManager;
 
 
-
     public VerificationCodeResource (MailService mailService) {
         this.mailService = mailService;
     }
@@ -37,25 +36,22 @@ public class VerificationCodeResource {
      * 接收客户端的请求参数，生成验证码
      * @param phoneOrEmail 手机号码或邮箱
      * @param state 判断phoneOrEmail是手机还是邮箱（0：手机号码，1：邮箱）
-     * @return
+     * @param clientId 匹配用户的id
      */
     @GetMapping("/verify-code/send/{phoneOrEmail}/{state}/{clientId}")
     @Timed
-    public String createVerificationCode(@PathVariable String phoneOrEmail, @PathVariable Integer state, @PathVariable String clientId) {
-        log.debug("获取验证码请求参数为 : {}, {}", phoneOrEmail, state);
-
+    public void createVerificationCode(@PathVariable String phoneOrEmail, @PathVariable Integer state, @PathVariable String clientId) {
+        log.debug("获取验证码请求参数为 : {}, {}, {}", phoneOrEmail, state, clientId);
+        //获取identifyingCode的缓存条目
         Cache identifyingCodeCache = cacheManager.getCache("identifyingCode");
-
         //生成6位数的随机数字作为验证码
         String code = "";
         Random random = new Random();
         for (int i = 0; i < 6; i++) {
             code += random.nextInt(10);
         }
-        identifyingCodeCache.put(clientId,code);
-
-        System.out.println(identifyingCodeCache.get(clientId).get());
-
+        //将clientId和code放入该缓存条目
+        identifyingCodeCache.put(clientId, code);
         //假如state为1，则向邮箱发送验证码；state为0，则向手机号码发送验证码。
         if(state == 1) {
             User user = new User();
@@ -64,6 +60,5 @@ public class VerificationCodeResource {
             user.setCode(code);
             this.mailService.sendVerificationCodeMail(user);
         }
-        return code;
     }
 }
