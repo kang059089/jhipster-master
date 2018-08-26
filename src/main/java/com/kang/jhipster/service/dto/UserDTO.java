@@ -37,7 +37,6 @@ public class UserDTO {
 
     private String phone;
 
-    @Size(max = 256)
     private String imageUrl;
 
     private boolean activated = false;

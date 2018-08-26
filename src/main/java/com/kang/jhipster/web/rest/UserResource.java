@@ -8,6 +8,7 @@ import com.kang.jhipster.security.AuthoritiesConstants;
 import com.kang.jhipster.service.MailService;
 import com.kang.jhipster.service.UserService;
 import com.kang.jhipster.service.dto.UserDTO;
+import com.kang.jhipster.service.util.PictureUtil;
 import com.kang.jhipster.web.rest.errors.BadRequestAlertException;
 import com.kang.jhipster.web.rest.errors.EmailAlreadyUsedException;
 import com.kang.jhipster.web.rest.errors.LoginAlreadyUsedException;
@@ -20,12 +21,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -117,9 +124,9 @@ public class UserResource {
      */
     @PutMapping("/users")
     @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO, HttpServletRequest request) {
         log.debug("REST request to update User : {}", userDTO);
+
         Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
             throw new EmailAlreadyUsedException();
@@ -196,4 +203,13 @@ public class UserResource {
         Integer count = userRepository.findEmailOrPhone(phoneOrEmail);
         return count;
     }
+
+    @GetMapping("/users/userId/{userId}")
+    @Timed
+    public ResponseEntity<User> findUserById(@PathVariable String userId) {
+        log.debug("通过用户id查询用户信息的参数：{}", userId);
+        User user = userRepository.findUserById(userId);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(user));
+    }
+
 }
