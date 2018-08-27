@@ -70,7 +70,8 @@ public class PictureUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return imgFilePath;
+        //头像访问地址后加uuid是为了地址更新后能在前端页面显示
+        return imgFilePath + "?avatar=" + UUIDUtil.getUUID();
     }
 
     /**
